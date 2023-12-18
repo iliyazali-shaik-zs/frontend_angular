@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .triangle {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-left: 300px solid transparent;
+        border-right: 300px solid transparent;
+        border-bottom: 300px solid red;
+      }
+
+      .circle {
+        width: 247px;
+        height: 247px;
+        border-radius: 50%;
+        background: yellow;
+        position: absolute;
+        top: 53px;
+        right: 50%;
+        transform: translateX(50%);
+      }
+
+      .circle::after {
+        content: "";
+        width: 70%;
+        height: 70%;
+        background: blue;
+        position: absolute;
+        top: 15%;
+        left: 15%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="triangle">
+      <div class="circle"></div>
+    </div>
+  </body>
+</html>

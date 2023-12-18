@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        box-shadow: #ccc;
+      }
+      body {
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        display: flex;
+      }
+      .grid-container {
+        display: grid;
+        background-color: black;
+        height: 850px;
+        width: 2500px;
+        /* grid-template-rows: repeat(4, 300px);
+        grid-template-columns: repeat(5, 300px); */
+        grid-template-columns: auto auto auto auto;
+        grid-gap: 20px;
+      }
+      .grid-item {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: rgb(207, 200, 200);
+        border: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .grid-item img {
+        width: 35%;
+        height: 35%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      @media screen and (max-width: 600px) {
+        .grid-item img {
+          width: 70%;
+          height: 70%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container" id="gridContainer"></div>
+
+    <script>
+      function createGridItems(numberOfItems) {
+        const gridContainer = document.getElementById("gridContainer");
+        for (let i = 0; i < numberOfItems; i++) {
+          const gridItem = document.createElement("div");
+          gridItem.className = "grid-item";
+          const img = document.createElement("img");
+          img.src = "person.png";
+          if (i < 11) {
+            gridItem.appendChild(img);
+            gridContainer.appendChild(gridItem);
+          } else {
+            gridItem.appendChild(img);
+            const textElement = document.createElement("div");
+            textElement.textContent = numberOfItems - 11 + "+";
+            gridItem.appendChild(textElement);
+            gridContainer.appendChild(gridItem);
+            break;
+          }
+        }
+      }
+      createGridItems(4);
+    </script>
+  </body>
+</html>
