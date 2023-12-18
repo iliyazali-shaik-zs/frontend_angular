@@ -1,1 +1,1 @@
-# frontend_angular
+#  Html,CSS and JavaScript + Angular training
