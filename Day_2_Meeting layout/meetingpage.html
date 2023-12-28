@@ -22,7 +22,7 @@
         width: 2500px;
         /* grid-template-rows: repeat(4, 300px);
         grid-template-columns: repeat(5, 300px); */
-        grid-template-columns: auto auto auto auto;
+        grid-template-columns: auto auto auto;
         grid-gap: 20px;
       }
       .grid-item {
@@ -36,8 +36,8 @@
         padding: 20px;
       }
       .grid-item img {
-        width: 35%;
-        height: 35%;
+        width: 30%;
+        height: 30%;
         object-fit: cover;
         border-radius: 50%;
       }
@@ -60,20 +60,20 @@
           gridItem.className = "grid-item";
           const img = document.createElement("img");
           img.src = "person.png";
-          if (i < 11) {
+          if (i < 8) {
             gridItem.appendChild(img);
             gridContainer.appendChild(gridItem);
           } else {
             gridItem.appendChild(img);
             const textElement = document.createElement("div");
-            textElement.textContent = numberOfItems - 11 + "+";
+            textElement.textContent = numberOfItems - 8 + "+";
             gridItem.appendChild(textElement);
             gridContainer.appendChild(gridItem);
             break;
           }
         }
       }
-      createGridItems(4);
+      createGridItems(9);
     </script>
   </body>
 </html>
