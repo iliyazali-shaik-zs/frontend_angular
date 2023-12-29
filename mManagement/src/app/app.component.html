@@ -1,2 +1,4 @@
-<app-d3-org-chart [data]="data"></app-d3-org-chart>
-<!-- <app-card></app-card> -->
+<app-d3-org-chart
+  [data]="data"
+  (nodeClick)="handleClick($event)"
+></app-d3-org-chart>

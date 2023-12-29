@@ -5,9 +5,12 @@ import {
   Input,
   ViewChild,
   ElementRef,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 
 import { OrgChart } from 'd3-org-chart';
+import { Node } from '../models/org.model';
 
 @Component({
   selector: 'app-d3-org-chart',
@@ -16,7 +19,8 @@ import { OrgChart } from 'd3-org-chart';
 })
 export class D3OrgChartComponent implements OnInit, OnChanges {
   @ViewChild('chartContainer') chartContainer: ElementRef;
-  @Input() data: any[];
+  @Input() data: Node[];
+  @Output() nodeClick: EventEmitter<number> = new EventEmitter<number>();
   chart: any;
 
   constructor() {}
@@ -30,6 +34,9 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     this.updateChart();
   }
 
+  handleClick(d: any) {
+    this.nodeClick.emit(d.data.id);
+  }
   ngOnChanges() {
     this.updateChart();
   }
@@ -53,41 +60,6 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       .setActiveNodeCentered(true)
       .compact(true)
       .initialZoom(0.7)
-      // .nodeContent((d: any) => {
-      //   return `<div
-      //   style="
-      //     border: 1px solid black;
-      //     width: 200px;
-      //     height: 80px;
-      //     display: flex;
-      //     flex-direction: row;
-      //     align-items: center;
-      //     gap: 16px;
-      //     padding: 16px;
-      //   "
-      // >
-      //   <img
-      //     src="${d.data.img}"
-      //     style="height: ${d.data.imgHeight}; width: ${d.data.imgWidth}; border-radius: 50%"
-      //   />
-      //   <div style="display: flex; flex-direction: column; gap: 4px">
-      //     <div>${d.data.name}</div>
-      //     <div>${d.data.positionName}</div>
-      //     <div style="background-color: #36404a;
-      //     border-radius: 10px;
-      //     color: #e2e4e7;
-      //     font-size: 10px;
-      //     font-weight: 400;
-      //     height: 25px;
-      //     line-height: 25px;
-      //     margin-bottom:5px;
-      //     margin-left: 10px;
-      //     text-align: center;
-      //     width: 48px">${d.data.size}</div>
-      //   </div>
-      // </div>
-      // `;
-      // })
       .nodeContent((d: any) => {
         return `
                 <div style="padding-top:30px;background-color:none;margin-left:1px;height:${
@@ -128,6 +100,8 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       .childrenMargin((d: any) => 40)
       .compactMarginBetween((d: any) => 15)
       .compactMarginPair((d: any) => 80)
+      .onNodeClick((d: any) => this.handleClick(d))
+      .expandAll(true)
       .render();
   }
 }
