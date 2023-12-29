@@ -16,7 +16,7 @@ export class OrgChartService {
           parentId: item1.reportingTo,
           name: item1.name,
           positionName: item1.designation,
-          img: item1.profileUrl,
+          img: item1.profileUrl ?? '../assets/download.png',
           size: item1.numberOfSubOrdinates,
         };
         return nodeData;
