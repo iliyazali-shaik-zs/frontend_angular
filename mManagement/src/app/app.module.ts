@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OrganizationChartModule } from './organization-chart/organization-chart.module';
 
+import { D3OrgChartComponent } from './d3-org-chart/d3-org-chart.component';
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, OrganizationChartModule],
+  declarations: [AppComponent, D3OrgChartComponent],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditorComponent } from './editor.component';
+import { D3OrgChartComponent } from './d3-org-chart.component';
 
-describe('EditorComponent', () => {
-  let component: EditorComponent;
-  let fixture: ComponentFixture<EditorComponent>;
+describe('D3OrgChartComponent', () => {
+  let component: D3OrgChartComponent;
+  let fixture: ComponentFixture<D3OrgChartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditorComponent ]
+      declarations: [ D3OrgChartComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditorComponent);
+    fixture = TestBed.createComponent(D3OrgChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
