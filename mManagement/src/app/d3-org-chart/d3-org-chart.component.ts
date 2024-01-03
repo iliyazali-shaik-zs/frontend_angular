@@ -11,6 +11,7 @@ import {
 
 import { OrgChart } from 'd3-org-chart';
 import { Node } from '../models/org.model';
+import { OrgChartService } from '../service/org-chart.service';
 
 @Component({
   selector: 'app-d3-org-chart',
@@ -19,23 +20,44 @@ import { Node } from '../models/org.model';
 })
 export class D3OrgChartComponent implements OnInit, OnChanges {
   @ViewChild('chartContainer') chartContainer: ElementRef;
-  @Input() data: Node[];
-  @Output() nodeClick: EventEmitter<number> = new EventEmitter<number>();
+  data: Node[];
   chart: any;
+  childData: Node[];
 
-  constructor() {}
+  // -----
+  constructor(public orgService: OrgChartService) {}
+  initialNode = {
+    id: 201,
+    parentId: null,
+    name: 'Mukesh Singh',
+    positionName: 'Founder',
+    img: 'https://lh3.googleusercontent.com/a/ACg8ocKogyaJ0otNwZQGLNlzvZltsoJIuszOhje5TpjU9PxCrBg=s96-c',
+    size: 411,
+  };
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.data = [
+      this.initialNode,
+      ...this.orgService.getChildren(this.initialNode.id),
+    ];
+  }
+  handleClick(d: any) {
+    const isParentIdInData = this.data.some(
+      (item) => item.parentId === d.data.id - 0
+    );
+    this.childData = [];
+    if (!isParentIdInData) {
+      this.childData = this.orgService.getChildren(d.data.id - 0);
+    }
+    this.data = [...this.data, ...this.childData];
 
+    this.updateChart();
+  }
   ngAfterViewInit() {
     if (!this.chart) {
       this.chart = new OrgChart();
     }
     this.updateChart();
-  }
-
-  handleClick(d: any) {
-    this.nodeClick.emit(d.data.id);
   }
   ngOnChanges() {
     this.updateChart();
@@ -86,9 +108,9 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
                          d.data.positionName
                        } </div>
                    </div>
-                   <div style="display:flex;justify-content:space-between;padding-left:15px;padding-right:15px;">
-                     <div > Manages:  ${d.data._directSubordinates} 👤</div>
-                     <div > Oversees: ${d.data._totalSubordinates} 👤</div>
+                   <div style="display:flex;justify-content:center;">
+                     <div style="background-color: #36404a;border-radius: 10px;color: #e2e4e7;font-size: 10px;font-weight: 400;height: 25px;line-height: 25px;text-align: center;width: 48px" >
+                      ${d.data.size}</div>
                    </div>
                   </div>
           </div>
