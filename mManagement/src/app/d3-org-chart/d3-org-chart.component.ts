@@ -81,7 +81,6 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       .childrenMargin((d: any) => 75)
       .setActiveNodeCentered(true)
       .compact(true)
-      .initialZoom(0.7)
       .nodeContent((d: any) => {
         return `
                 <div style="padding-top:30px;background-color:none;margin-left:1px;height:${
@@ -116,9 +115,9 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
           </div>
       `;
       })
-      .nodeWidth((d: any) => 250)
+      .nodeWidth((d: any) => 270)
       .initialZoom(0.7)
-      .nodeHeight((d: any) => 175)
+      .nodeHeight((d: any) => 180)
       .childrenMargin((d: any) => 40)
       .compactMarginBetween((d: any) => 15)
       .compactMarginPair((d: any) => 80)
